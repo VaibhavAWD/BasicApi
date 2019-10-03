@@ -43,6 +43,11 @@ function hasRequiredParams($required_params, $response) {
     }
 }
 
+function buildMessage($error, $msg) {
+    $message['error'] = $error;
+    $message['message'] = $msg;
+}
+
 function buildResponse($status_code, $message, $response) {
     $response->withHeader('Content-type', 'application/json');
     $response->withStatus($status_code);
