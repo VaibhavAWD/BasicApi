@@ -48,6 +48,22 @@ function buildResponse($status_code, $message, $response) {
     $response->withStatus($status_code);
     $response->write(json_encode($message));
 }
+
+/**
+ * Validating email address
+ * @param String $email User email address
+ * @return boolean
+ */
+function isValidEmail($email, $response) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message["error"] = true;
+        $message["message"] = "Email address is not valid";
+        buildResponse(400, $message, $response);
+        return false;
+    } else {
+        return true;
+    }
+}
 /* -------------------- END HELPER FUNCTIONS ---------------------------- */
 
 $app->run();
